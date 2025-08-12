@@ -1,4 +1,4 @@
-# 🚀 Puchsach MCP Server
+# 🚀 Sach MCP Server
 
 *An intelligent analysis and assistance server powered by FastMCP and local LLM integration* 🤖✨
 
@@ -75,8 +75,16 @@ Content Extraction: readabilipy + markdownify
 
 Web Scraping: BeautifulSoup
 
+
+
 LLM Integration: Ollama LLaMA 3.2 for advanced NLP tasks
 
 Auth: Custom Bearer token with RSA key pair
 
 Server: Async modular tools using FastMCP
+```
+
+Contributor:
+* https://github.com/guptaavani111
+* https://github.com/JDass05
+
