@@ -1,179 +1,82 @@
-# MCP Starter for Puch AI
+# 🚀 Puchsach MCP Server
 
-This is a starter template for creating your own Model Context Protocol (MCP) server that works with Puch AI. It comes with ready-to-use tools for job searching and image processing.
-
-## What is MCP?
-
-MCP (Model Context Protocol) allows AI assistants like Puch to connect to external tools and data sources safely. Think of it like giving your AI extra superpowers without compromising security.
-
-## What's Included in This Starter?
-
-## Folders
-
-- **[`mcp-bearer-token/`](./mcp-bearer-token/)**  
-  Example MCP servers using **Bearer token** auth (required by Puch AI). Includes:
-  - **[`mcp_starter.py`](./mcp-bearer-token/mcp_starter.py)**  
-    A minimal MCP server with:
-    - Text input/output tool (echo-style processing)
-    - Image input/output tool (e.g., convert to black & white)
-    - Bearer token validation
-  - **[`puch-user-id-mcp-example.py`](./mcp-bearer-token/puch-user-id-mcp-example.py)**  
-    A task management MCP server that demonstrates how to use `puch_user_id` (a unique, Puch-provided user identifier) to scope tasks and data per user.
-
-- **[`mcp-google-oauth/`](./mcp-google-oauth/)**  
-  Example MCP server showing how to implement **OAuth** with Google for MCP authentication/authorization.
-
-- **[`mcp-oauth-github/`](./mcp-oauth-github/)**  
-  Example MCP server showing how to implement **OAuth** with GitHub for MCP authentication/authorization.
-
-## Quick Setup Guide
-
-### Step 1: Install Dependencies
-
-First, make sure you have Python 3.11 or higher installed. Then:
-
-```bash
-# Create virtual environment
-uv venv
-
-# Install all required packages
-uv sync
-
-# Activate the environment
-source .venv/bin/activate
-```
-
-### Step 2: Set Up Environment Variables
-
-Create a `.env` file in the project root:
-
-```bash
-# Copy the example file
-cp .env.example .env
-```
-
-Then edit `.env` and add your details:
-
-```env
-AUTH_TOKEN=your_secret_token_here
-MY_NUMBER=919876543210
-```
-
-**Important Notes:**
-
-- `AUTH_TOKEN`: This is your secret token for authentication. Keep it safe!
-- `MY_NUMBER`: Your WhatsApp number in format `{country_code}{number}` (e.g., `919876543210` for +91-9876543210)
-
-### Step 3: Run the Server
-
-```bash
-cd mcp-bearer-token
-python mcp_starter.py
-```
-
-You'll see: `🚀 Starting MCP server on http://0.0.0.0:8086`
-
-### Step 4: Make It Public (Required by Puch)
-
-Since Puch needs to access your server over HTTPS, you need to expose your local server:
-
-#### Option A: Using ngrok (Recommended)
-
-1. **Install ngrok:**
-   Download from https://ngrok.com/download
-
-2. **Get your authtoken:**
-   - Go to https://dashboard.ngrok.com/get-started/your-authtoken
-   - Copy your authtoken
-   - Run: `ngrok config add-authtoken YOUR_AUTHTOKEN`
-
-3. **Start the tunnel:**
-   ```bash
-   ngrok http 8086
-   ```
-
-#### Option B: Deploy to Cloud
-
-You can also deploy this to services like:
-
-- Railway
-- Render
-- Heroku
-- DigitalOcean App Platform
-
-## How to Connect with Puch AI
-
-1. **[Open Puch AI](https://wa.me/+919998881729)** in your browser
-2. **Start a new conversation**
-3. **Use the connect command:**
-   ```
-   /mcp connect https://your-domain.ngrok.app/mcp your_secret_token_here
-   ```
-
-### Debug Mode
-
-To get more detailed error messages:
-
-```
-/mcp diagnostics-level debug
-```
-
-## Customizing the Starter
-
-### Adding New Tools
-
-1. **Create a new tool function:**
-
-   ```python
-   @mcp.tool(description="Your tool description")
-   async def your_tool_name(
-       parameter: Annotated[str, Field(description="Parameter description")]
-   ) -> str:
-       # Your tool logic here
-       return "Tool result"
-   ```
-
-2. **Add required imports** if needed
-
-## 📚 **Additional Documentation Resources**
-
-### **Official Puch AI MCP Documentation**
-
-- **Main Documentation**: https://puch.ai/mcp
-- **Protocol Compatibility**: Core MCP specification with Bearer & OAuth support
-- **Command Reference**: Complete MCP command documentation
-- **Server Requirements**: Tool registration, validation, HTTPS requirements
-
-### **Technical Specifications**
-
-- **JSON-RPC 2.0 Specification**: https://www.jsonrpc.org/specification (for error handling)
-- **MCP Protocol**: Core protocol messages, tool definitions, authentication
-
-### **Supported vs Unsupported Features**
-
-**✓ Supported:**
-
-- Core protocol messages
-- Tool definitions and calls
-- Authentication (Bearer & OAuth)
-- Error handling
-
-**✗ Not Supported:**
-
-- Videos extension
-- Resources extension
-- Prompts extension
-
-## Getting Help
-
-- **Join Puch AI Discord:** https://discord.gg/VMCnMvYx
-- **Check Puch AI MCP docs:** https://puch.ai/mcp
-- **Puch WhatsApp Number:** +91 99988 81729
+*An intelligent analysis and assistance server powered by FastMCP and local LLM integration* 🤖✨
 
 ---
 
-**Happy coding! 🚀**
+## 📖 Overview
 
-Use the hashtag `#BuildWithPuch` in your posts about your MCP!
+This *Modular Chatbot Platform (MCP) server* helps you:
 
-This starter makes it super easy to create your own MCP server for Puch AI. Just follow the setup steps and you'll be ready to extend Puch with your custom tools!
+- ✅ Fact-check statements with web context  
+- 🎭 Analyze message tone and style  
+- 🌐 Translate messages between languages  
+- ⚠ Detect scam or phishing content  
+- 🤝 Synthesize answers from web results using local LLM reasoning  
+
+Built with async Python, HTTP clients, HTML extraction, and Ollama’s LLaMA 3.2 model for smart, conversational assistance.
+
+---
+
+## ✨ Features
+
+| Feature                       | Description                                                       |
+|------------------------------|-------------------------------------------------------------------|
+| 🔐 Secure Authentication      | Custom Bearer Token with RSA Key generation                       |
+| 📄 HTML to Markdown           | Clean extraction using readabilipy & markdownify             |
+| 🕵 Fact-Checking & Scam Detection | Detailed reports on truthfulness & phishing risks                |
+| 💬 Message Tone & Translation | Emotional tone analysis & natural language translation            |
+| 🌍 DuckDuckGo Web Scraping    | Lightweight, programmatic web search scraping                     |
+| 🧠 LLM Reasoning              | Advanced analysis & summarization via local Ollama LLaMA API     |
+| ⚡ Async Modular Server       | Fast, extensible tools using FastMCP                              |
+
+---
+
+## 🚀 Getting Started
+
+### 🔧 Prerequisites
+
+- Python 3.9+  
+- [FastMCP](https://github.com/your-fork/fastmcp) installed  
+- A .env file with:
+
+```env
+AUTH_TOKEN=your_secret_token_here
+MY_NUMBER=your_identifier_here
+OLLAMA_API_URL=http://localhost:11434/v1/chat/completions  # optional
+📦 Installation
+bash
+Copy
+Edit
+git clone https://github.com/yourusername/puchsach.git
+cd puchsach
+pip install -r requirements.txt
+▶ Running the Server
+bash
+Copy
+Edit
+python main.py
+Access the server at:
+http://0.0.0.0:8086
+
+🛠 Usage
+Available Tools
+Tool Name	Purpose
+fact_checker_online	Verify truthfulness of statements with context
+message_tone_checker_o	Analyze emotional & stylistic tone of text messages
+message_translator_o	Translate messages naturally preserving tone
+scam_detector_o	Detect phishing or scam likelihood
+whatsapp_search_engine_online	Synthesize answers from web pages & search results
+
+🧑‍💻 Technical Details
+HTTP Requests: Async via httpx
+
+Content Extraction: readabilipy + markdownify
+
+Web Scraping: BeautifulSoup
+
+LLM Integration: Ollama LLaMA 3.2 for advanced NLP tasks
+
+Auth: Custom Bearer token with RSA key pair
+
+Server: Async modular tools using FastMCP
